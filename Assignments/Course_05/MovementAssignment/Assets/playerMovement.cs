@@ -46,7 +46,7 @@ public class playerMovement : ProcessingLite.GP21
 
 
 
-        //Collision
+        //Wall collision
         if (playerPosition.x - (circleSize / 2) < 0)
         {
             playerVelocity = (Vector2.Reflect(playerVelocity, Vector2.left) * bounceLoss);
@@ -76,7 +76,8 @@ public class playerMovement : ProcessingLite.GP21
             shakeOffset = -playerVelocity.y * shakeMultiplier;
             PlayBounceSound();
         }
-        if (Vector2.Distance(playerPosition, enemyPosition) < (circleSize / 2) + (circleSize / 4)) //Enemy colission 
+        //Enemy collision 
+        if (Vector2.Distance(playerPosition, enemyPosition) < (circleSize / 2) + (circleSize / 4)) 
         {
             audioSource.PlayOneShot(kill, 1);
             playerVelocity = (Vector2.Reflect(playerVelocity, (playerPosition - enemyPosition).normalized));
@@ -96,8 +97,10 @@ public class playerMovement : ProcessingLite.GP21
                 playerVelocity = Vector2.zero;
             }
 
+            //Initial reset in case circle is far away
             ResetEnemy();
 
+            //Resets enemy until they spawn away from player
             while (Vector2.Distance(playerPosition, enemyPosition) < circleSize * 2)
             {
                 ResetEnemy();
@@ -128,6 +131,7 @@ public class playerMovement : ProcessingLite.GP21
         Stroke(255);
         Rect(screenOffset.x + Width, screenOffset.y + Height, screenOffset.x, screenOffset.y);
 
+        //Adds to timer if player has not won
         if (winCondition)
         {
             WinCondition(gameTimer);
@@ -137,10 +141,11 @@ public class playerMovement : ProcessingLite.GP21
             Fill(100, 100, 100);
             gameTimer += Time.deltaTime;
             TextSize((int)(Width * 2));
-            Text((Mathf.Round((float)gameTimer * 100) / 100).ToString() + " Seconds.", Width / 2, (Height / 6) * 5);
+            Text((Mathf.Round((float)gameTimer * 100) / 100).ToString() + " Seconds.", (Width / 2)+screenOffset.x, ((Height / 6) * 5)+ screenOffset.y);
         }
     }
 
+    //Gets the input as a vector
     public Vector2 GetPlayerAcceleration()
     {
         if (Input.GetKey(KeyCode.W))
@@ -160,29 +165,36 @@ public class playerMovement : ProcessingLite.GP21
         return playerAcceleration;
     }
 
+
+    //Resets enemy to random possible position
     void ResetEnemy()
     {
         enemyPosition.x = Random.Range((circleSize / 4), Width - (circleSize / 4));
         enemyPosition.y = Random.Range((circleSize / 4), Height - (circleSize / 4));
     }
 
+
     void WinCondition(double finalTime)
     {
         Fill(100, 100, 100);
         TextSize((int)(Width * 5));
 
+        //Checks if you have a highscore 
         if (finalTime < highScore)
         {
             Text("High Score!", Width / 2, (Height / 3) * 2);
+            Text("New highscore: "+(Mathf.Round((float)finalTime * 100) / 100).ToString(), Width / 2, (Height / 3));
         }
         else
         {
             Text("Finish!", Width / 2, (Height / 3) * 2);
+            Text("Highscore: " + (Mathf.Round((float)highScore * 100) / 100).ToString(), Width / 2, (Height / 3));
         }
 
 
         TextSize((int)(Width * 3));
         Text((Mathf.Round((float)finalTime * 100) / 100).ToString() + " Seconds.", Width / 2, (Height / 2));
+
         if (playerAcceleration != Vector2.zero)
         {
             winCondition = false;
