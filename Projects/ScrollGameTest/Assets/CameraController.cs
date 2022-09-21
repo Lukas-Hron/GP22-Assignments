@@ -7,16 +7,20 @@ public class CameraController : MonoBehaviour
     public Vector3 currentMouseScreenPosition;
     public Vector3 mouseScreenPositionLastFrame;
     public Vector3 mouseVector;
+    public float cameraSize;
     // Start is called before the first frame update
     void Start()
     {
-        
+        cameraSize = 5;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        cameraSize = Mathf.Clamp(cameraSize+(Input.mouseScrollDelta.y*-1),1,20); //Camera size change
+        Camera.main.orthographicSize = cameraSize;
+
+        if (Input.GetMouseButtonDown(0) || Input.mouseScrollDelta.y != 0f)
         {
             mouseScreenPositionLastFrame = Input.mousePosition;
         }

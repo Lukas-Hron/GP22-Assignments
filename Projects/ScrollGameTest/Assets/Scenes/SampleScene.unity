@@ -304,8 +304,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7c0bb1df0637a4eae398276b91b691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldPosition: {x: 0, y: 0, z: 0}
+  currentMouseScreenPosition: {x: 0, y: 0, z: 0}
+  mouseScreenPositionLastFrame: {x: 0, y: 0, z: 0}
   mouseVector: {x: 0, y: 0, z: 0}
+  cameraSize: 5
 --- !u!1 &1169598336
 GameObject:
   m_ObjectHideFlags: 0
