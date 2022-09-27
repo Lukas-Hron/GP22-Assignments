@@ -16,15 +16,12 @@ public class rotateBasedOnGroundNormal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Physics.Raycast(transform.position, Vector3.down, out hit);
-        if (hit.distance < 1)
-        {
+        Physics.Raycast(transform.position, Vector3.down, out hit,1f);
+
             currentUpDir = Vector3.MoveTowards(currentUpDir, hit.normal, Time.deltaTime * rotationMultiplier);
             transform.up = currentUpDir;
-        }
-        else
-        {
+        Debug.DrawRay(transform.position, hit.transform.position);
 
-        }
+
     }
 }
