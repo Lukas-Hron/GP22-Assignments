@@ -7,13 +7,12 @@ public class Zoomer : MonoBehaviour
     public GameObject zoomOrigin;
     [Range(0.0f, 1.0f)]
     public float zoomLevel;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-
+        Camera cam;
+        cam = gameObject.GetComponent<Camera>();
     }
-
-    // Update is called once per frame
     void Update()
     {
 
@@ -23,7 +22,8 @@ public class Zoomer : MonoBehaviour
         zoomOrigin.transform.localScale = new Vector3(zoom, zoom, zoom);
 
         ////Normal zoom (doesn't work)
-        //float zoom = Mathf.Lerp(1, 500, zoomLevel);
+        //float zoom = Mathf.Lerp(1, 500, zoomLevel
+        //);
         //zoomOrigin.transform.localScale = new Vector3(zoom, zoom, zoom);
     }
 

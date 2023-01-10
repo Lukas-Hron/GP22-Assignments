@@ -1,3 +1,31 @@
-![thing](https://user-images.githubusercontent.com/72085916/197785816-8759ac1d-5552-46cb-af75-451bb7502750.png)
-![](spacenoir.png)
-![](spacenoirprevoew.png)
+        ///////////////////////////////////////////////////// THING
+
+        //ly >> ed
+        voiceLine = Resources.Load<AudioClip>("Sounds/Narrator/narr_THING_ly_ed");
+        recievingRhyme = "ly";
+        endingRhyme = "ed";
+        firstSubtitles = "";
+        secondSubtitles = "";
+        timeToSplit = 0f;
+        keyWord = "THING";
+        AddVoiceLine();
+
+        //ed >> ing
+        voiceLine = Resources.Load<AudioClip>("Sounds/Narrator/narr_THING_ed_ing");
+        recievingRhyme = "ed";
+        endingRhyme = "ing";
+        firstSubtitles = "";
+        secondSubtitles = "";
+        timeToSplit = 0f;
+        keyWord = "THING";
+        AddVoiceLine();
+
+        //ing >> ly
+        voiceLine = Resources.Load<AudioClip>("Sounds/Narrator/narr_THING_ing_ly");
+        recievingRhyme = "ing";
+        endingRhyme = "ly";
+        firstSubtitles = "";
+        secondSubtitles = "";
+        timeToSplit = 0f;
+        keyWord = "THING";
+        AddVoiceLine();
